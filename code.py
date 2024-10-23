@@ -23,12 +23,13 @@ time_steps = len(df['week_year'].unique())
 
 # Define the layout of the app using Bootstrap components
 app.layout = dbc.Container([
-    dbc.Row(dbc.Col(html.H1("OpenStreetMap with Time Slider and Variable Selection"), className="mb-4 text-left")),
+    dbc.Row(dbc.Col(html.H1("Overview map of Farm Protests in Europe 2023-2024 by Protest Reasons"), className="mb-4 text-left")),
 
     # Dropdown menu aligned to the left
     dbc.Row(dbc.Col(dcc.Dropdown(
         id='variable-dropdown',
-        options=[
+        options=[       
+            {'label': 'All Protests', 'value': 'all_protests'},
             {'label': 'Opposition to Foreign Agricultural Imports', 'value': 'Opposition_to_Foreign_Agricultural_Imports'},
             {'label': 'Environmental Regulations and Agricultural Standards', 'value': 'Environmental_Regulations_and_Agricultural_Standards'}
             {'label': 'Subsidy Cuts', 'value': 'Subsidy_Cuts'}
@@ -46,8 +47,7 @@ app.layout = dbc.Container([
             {'label': 'Infrastructure and Transport Policies', 'value': 'Infrastructure_and_Transport_Policies'}
             {'label': 'Opposition to Non-Traditional Products', 'value': 'Opposition_to_Non-_Traditional_Products'}
             {'label': 'Opposition to Renewable Energy Projects', 'value': 'Opposition_to_Renewable_Energy_Projects'},
-            {'label': 'Consumer Awareness Initiatives', 'value': 'Consumer_Awareness_Initiatives'}            
-            {'label': 'All Protests', 'value': 'all_protests'}
+            {'label': 'Consumer Awareness Initiatives', 'value': 'Consumer_Awareness_Initiatives'}
         ],
         value='all_protests',  # Default value
         style={'width': '100%'}
