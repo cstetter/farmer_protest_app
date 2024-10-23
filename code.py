@@ -18,7 +18,7 @@ df['all_protests'] = 1
 
 # Initialize the Dash app
 app = dash.Dash(__name__)
-
+server = app.server
 # Calculate time steps
 time_steps = len(df['week_year'].unique())
 
