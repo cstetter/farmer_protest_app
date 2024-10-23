@@ -31,21 +31,21 @@ app.layout = dbc.Container([
         options=[       
             {'label': 'All Protests', 'value': 'all_protests'},
             {'label': 'Opposition to Foreign Agricultural Imports', 'value': 'Opposition_to_Foreign_Agricultural_Imports'},
-            {'label': 'Environmental Regulations and Agricultural Standards', 'value': 'Environmental_Regulations_and_Agricultural_Standards'}
-            {'label': 'Subsidy Cuts', 'value': 'Subsidy_Cuts'}
-            {'label': 'Bureaucratic Constraints', 'value': 'Bureaucratic_Constraints'}
-            {'label': 'Rising Production Costs', 'value': 'Rising_Production_Costs'}
-            {'label': 'National and Local State Support', 'value': 'National_and_Local_State_Support'}
-            {'label': 'Fair Compensation and Market Practices', 'value': 'Fair_Compensation_and_Market_Practices'}
-            {'label': 'Climate and Natural Disaster Relief', 'value': 'Climate_and_Natural_Disaster_Relief'}
-            {'label': 'Economic Struggles and Agricultural Livelihoods', 'value': 'Economic_Struggles_and_Agricultural_Livelihoods'}
-            {'label': 'Labor and Social Conditions', 'value': 'Labor_and_Social_Conditions'}
-            {'label': 'Opposition to EU Free-Trade Agreements', 'value': 'Opposition_to_EU_Free-_Trade_Agreements'}
-            {'label': 'Solidarity Movements', 'value': 'Solidarity_Movements'}
-            {'label': 'Livestock and Animal Welfare Protests', 'value': 'Livestock_and_Animal_Welfare_Protests'}
-            {'label': 'Miscellaneous Agriculture-Related Protests', 'value': 'Miscellaneous_Agriculture-_Related_Protests'}
-            {'label': 'Infrastructure and Transport Policies', 'value': 'Infrastructure_and_Transport_Policies'}
-            {'label': 'Opposition to Non-Traditional Products', 'value': 'Opposition_to_Non-_Traditional_Products'}
+            {'label': 'Environmental Regulations and Agricultural Standards', 'value': 'Environmental_Regulations_and_Agricultural_Standards'},
+            {'label': 'Subsidy Cuts', 'value': 'Subsidy_Cuts'},
+            {'label': 'Bureaucratic Constraints', 'value': 'Bureaucratic_Constraints'},
+            {'label': 'Rising Production Costs', 'value': 'Rising_Production_Costs'},
+            {'label': 'National and Local State Support', 'value': 'National_and_Local_State_Support'},
+            {'label': 'Fair Compensation and Market Practices', 'value': 'Fair_Compensation_and_Market_Practices'},
+            {'label': 'Climate and Natural Disaster Relief', 'value': 'Climate_and_Natural_Disaster_Relief'},
+            {'label': 'Economic Struggles and Agricultural Livelihoods', 'value': 'Economic_Struggles_and_Agricultural_Livelihoods'},
+            {'label': 'Labor and Social Conditions', 'value': 'Labor_and_Social_Conditions'},
+            {'label': 'Opposition to EU Free-Trade Agreements', 'value': 'Opposition_to_EU_Free-_Trade_Agreements'},
+            {'label': 'Solidarity Movements', 'value': 'Solidarity_Movements'},
+            {'label': 'Livestock and Animal Welfare Protests', 'value': 'Livestock_and_Animal_Welfare_Protests'},
+            {'label': 'Miscellaneous Agriculture-Related Protests', 'value': 'Miscellaneous_Agriculture-_Related_Protests'},
+            {'label': 'Infrastructure and Transport Policies', 'value': 'Infrastructure_and_Transport_Policies'},
+            {'label': 'Opposition to Non-Traditional Products', 'value': 'Opposition_to_Non-_Traditional_Products'},
             {'label': 'Opposition to Renewable Energy Projects', 'value': 'Opposition_to_Renewable_Energy_Projects'},
             {'label': 'Consumer Awareness Initiatives', 'value': 'Consumer_Awareness_Initiatives'}
         ],
