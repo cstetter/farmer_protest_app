@@ -1,33 +1,32 @@
-import dash
+# %%writefile ../protest_app/code.py
+
+import pandas as pd
 from dash import dcc, html
 from dash.dependencies import Input, Output, State
 import plotly.graph_objs as go
-import pandas as pd
-import numpy as np
+import dash_bootstrap_components as dbc  # Ensure dbc is imported
+import dash
 
-
-selected_data = pd.read_csv('selected_data.csv')
-
-
-
-
+# Load the selected data
+selected_data = pd.read_csv('../protest_app/selected_data.csv')
 
 # Create a pandas DataFrame
 df = pd.DataFrame(selected_data)
 df['all_protests'] = 1
 
-# Initialize the Dash app
-app = dash.Dash(__name__)
+# Initialize the Dash app with Bootstrap
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
+
 # Calculate time steps
 time_steps = len(df['week_year'].unique())
 
-# Define the layout of the app
-app.layout = html.Div([
-    html.H1("OpenStreetMap with Time Slider and Variable Selection"),
+# Define the layout of the app using Bootstrap components
+app.layout = dbc.Container([
+    dbc.Row(dbc.Col(html.H1("OpenStreetMap with Time Slider and Variable Selection"), className="mb-4 text-left")),
 
-    # Dropdown menu to select the variable to display (var1 or var2)
-    dcc.Dropdown(
+    # Dropdown menu aligned to the left
+    dbc.Row(dbc.Col(dcc.Dropdown(
         id='variable-dropdown',
         options=[
             {'label': 'Rising Production Costs', 'value': 'Subsidy_Cuts'},
@@ -35,29 +34,36 @@ app.layout = html.Div([
             {'label': 'All Protests', 'value': 'all_protests'},
         ],
         value='all_protests',  # Default value
-        style={'width': '50%'}
-    ),
+        style={'width': '100%'}
+    ), width=6)),  # Keep the width setting if you want to control the size
 
-    # Slider to select the time step
-    html.Div(dcc.Slider(
-                id='time-slider',
-                min=1,
-                max=time_steps,
-                step=1,
-                value=1,  # Default value for the slider
-                marks={i+1: week for i, week in enumerate(df["week_year"].unique())},
-                ), style={'width': '50%'}
-    ),
+    # Time slider aligned to the left below the dropdown
+    dbc.Row(dbc.Col(dcc.Slider(
+        id='time-slider',
+        min=1,
+        max=time_steps,
+        step=1,
+        value=1,  # Default value for the slider
+        marks={i + 1: week for i, week in enumerate(df["week_year"].unique())},
+    ), width=6)),  # Keep the width setting
 
-    # Play/Pause button
-    html.Button('Play', id='play-button', n_clicks=0),
+    # Play button aligned to the left
+    dbc.Row(dbc.Col(
+        html.Button('Play', id='play-button', n_clicks=0, className='btn btn-primary'),
+        width='auto',
+        className='mb-4'
+    )),
+
+    # Graph to display the map with dots, aligned to the left
+    dbc.Row(dbc.Col(
+        dcc.Graph(id='map-graph'),
+        width=10  # Set width to allow proper layout
+    )),
 
     # Interval component to update the slider automatically
-    dcc.Interval(id='interval-component', interval=1000, n_intervals=0, disabled=True),  # Default: disabled
+    dcc.Interval(id='interval-component', interval=1000, n_intervals=0, disabled=True)  # Default: disabled
 
-    # Graph to display the map with dots
-    dcc.Graph(id='map-graph')
-])
+], fluid=True)  # Use fluid for full-width container
 
 # Define the callback to update the map based on the slider and dropdown values
 @app.callback(
@@ -77,19 +83,24 @@ def update_map(selected_time, selected_variable):
         marker=dict(
             size=8,
             color="red",
-            showscale=True
-        )
+            showscale=False
+        ),
+        hoverinfo='text',  # Show only the text on hover
+        hovertext=filtered_df['notes_wrapped']  # Display event_date on hover
     ))
 
     fig.update_layout(
         mapbox=dict(
-            style="open-street-map",  # Use an empty background
-            zoom=4.3,  # Adjust zoom level
+            style="carto-positron",  # Use an empty background
+            zoom=3.5,  # Adjust zoom level
             center={"lat": 47.5260, "lon": 5.2551},  # Center on Europe
         ),
-        width=1600,  # Adjust the width of the plot (in pixels)
-        height=1200,  # Adjust the height of the plot (in pixels)
-        margin={"r": 0, "t": 0, "l": 0, "b": 0},
+        showlegend=False,
+        height=600,
+        width=1000,
+        margin=dict(l=0, r=0, t=0, b=0),
+        xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+        yaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
     )
 
     return fig
