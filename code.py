@@ -8,7 +8,7 @@ import dash_bootstrap_components as dbc  # Ensure dbc is imported
 import dash
 
 # Load the selected data
-selected_data = pd.read_csv('../protest_app/selected_data.csv')
+selected_data = pd.read_csv('selected_data.csv')
 
 # Create a pandas DataFrame
 df = pd.DataFrame(selected_data)
