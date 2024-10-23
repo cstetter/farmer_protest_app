@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 
 
-selected_data = pd.read_csv('../protest_app/selected_data.csv')
+selected_data = pd.read_csv('selected_data.csv')
 
 
 
