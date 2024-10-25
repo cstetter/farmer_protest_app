@@ -51,7 +51,7 @@ app.layout = dbc.Container([
         ],
         value='all_protests',  # Default value
         style={'width': '100%'}
-    ), width=6)),  # Keep the width setting if you want to control the size
+    ), width=10)),  # Keep the width setting if you want to control the size
 
     # Time slider aligned to the left below the dropdown
     dbc.Row(dbc.Col(dcc.Slider(
@@ -60,8 +60,8 @@ app.layout = dbc.Container([
         max=time_steps,
         step=1,
         value=1,  # Default value for the slider
-        marks={i + 1: week for i, week in enumerate(df["week_year"].unique())},
-    ), width=6)),  # Keep the width setting
+        marks={i + 1: f"{week.split('-')[0]}<br>Week {week.split('-')[1]}" for i, week in enumerate(df["week_year"].unique())},
+    ), width=10)),  # Keep the width setting
 
     # Play button aligned to the left
     dbc.Row(dbc.Col(
