@@ -87,6 +87,10 @@ app.layout = dbc.Container([
         width=10  # Set width to allow proper layout
     )),
 
+    dbc.Row(dbc.Col(html.P("Data source: Armed Conflict Location & Event Data Project (ACLED); www.acleddata.com."), className="mb-4 text-left")),
+
+    dbc.Row(dbc.Col(html.P("More information on how the categories of protest reasons wer built can be found at |link to paper|."), className="mb-4 text-left")),
+
     # Interval component to update the slider automatically
     dcc.Interval(id='interval-component', interval=1000, n_intervals=0, disabled=True)  # Default: disabled
 
@@ -156,6 +160,8 @@ def update_slider(n_intervals, current_value):
         return current_value + 1  # Increment slider value
     else:
         return 1  # Reset slider to the beginning after reaching the end
+
+
 
 # Run the Dash app
 if __name__ == '__main__':
