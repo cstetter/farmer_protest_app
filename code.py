@@ -25,6 +25,9 @@ time_steps = len(df['week_year'].unique())
 app.layout = dbc.Container([
     dbc.Row(dbc.Col(html.H1("Overview map of Farm Protests in Europe 2023-2024 by Protest Reasons"), className="mb-4 text-left")),
 
+    dbc.Row(dbc.Col(html.H1(" "), className="mb-4 text-left")),
+
+
     # Dropdown menu aligned to the left
     dbc.Row(dbc.Col(dcc.Dropdown(
         id='variable-dropdown',
@@ -54,19 +57,19 @@ app.layout = dbc.Container([
     ), width=8)),  # Keep the width setting if you want to control the size
 
     # Time slider aligned to the left below the dropdown
-dbc.Row([
-    dbc.Col([
-        dbc.Label("Select Year-Week", html_for="time-slider"),  # Title for the slider
-        dcc.Slider(
-            id='time-slider',
-            min=1,
-            max=time_steps,
-            step=1,
-            value=1,  # Default starting value for the slider
-            marks={i + 1: f"{week.split('-')[0]}<br>Week {week.split('-')[1]}" for i, week in enumerate(df["week_year"].unique())}
-        )
-    ], width=10)  # Width setting for the column
-])
+    dbc.Row([
+        dbc.Col([
+            dbc.Label("Select Year-Week", html_for="time-slider"),  # Title for the slider
+            dcc.Slider(
+                id='time-slider',
+                min=1,
+                max=time_steps,
+                step=1,
+                value=1,  # Default starting value for the slider
+                marks={i + 1: f"{week.split('-')[0]}<br>Week {week.split('-')[1]}" for i, week in enumerate(df["week_year"].unique())}
+            )
+        ], width=10)  # Width setting for the column
+    ]),
 
     # Play button aligned to the left
     dbc.Row(dbc.Col(
