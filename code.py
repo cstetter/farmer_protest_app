@@ -51,21 +51,40 @@ app.layout = dbc.Container([
         ],
         value='all_protests',  # Default value
         style={'width': '100%'}
-    ), width=10)),  # Keep the width setting if you want to control the size
+    ), width=8)),  # Keep the width setting if you want to control the size
 
     # Time slider aligned to the left below the dropdown
-    dbc.Row(dbc.Col(dcc.Slider(
-        id='time-slider',
-        min=1,
-        max=time_steps,
-        step=1,
-        value=1,  # Default value for the slider
-        marks={i + 1: week for i, week in enumerate(df["week_year"].unique())},
-        tooltip={
-            "always_visible": True,
-            "template": "$ {value}"
+dbc.Row([
+    dbc.Col([
+        dbc.Label("Select Year-Week", html_for="time-slider"),  # Title for the slider
+        dcc.Slider(
+            id='time-slider',
+            min=1,
+            max=time_steps,
+            step=1,
+            value=1,  # Default starting value for the slider
+            marks={},  # Empty marks to avoid showing them permanently
+            tooltip={
+                "always_visible": True,  # Tooltip always visible
+                "placement": "bottom",  # Optional position setting
+                "template": ""  # Template will be updated dynamically
+            }
+        )
+    ], width=10)  # Width setting for the column
+])
+
+# Callback to update tooltip text based on the slider value
+@app.callback(
+    Output('time-slider', 'tooltip'),
+    [Input('time-slider', 'value')]
+)
+def update_tooltip(value):
+    # Mapping slider position to week labels
+    week_mapping = {i + 1: week for i, week in enumerate(df["week_year"].unique())}
+    return {
+        "always_visible": True,
+        "template": f"{week_mapping.get(value, '')}"  # Display the current week label
     }
-    ), width=10)),  # Keep the width setting
 
     # Play button aligned to the left
     dbc.Row(dbc.Col(
@@ -117,7 +136,7 @@ def update_map(selected_time, selected_variable):
         ),
         showlegend=False,
         height=600,
-        width=1000,
+        width=1200,
         margin=dict(l=0, r=0, t=0, b=0),
         xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
         yaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
