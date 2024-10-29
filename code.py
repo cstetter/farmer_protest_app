@@ -25,9 +25,6 @@ time_steps = len(df['week_year'].unique())
 app.layout = dbc.Container([
     dbc.Row(dbc.Col(html.H1("Overview map of Farm Protests in Europe 2023-2024 by Protest Reasons"), className="mb-4 text-left")),
 
-    dbc.Row(dbc.Col(html.H1(" "), className="mb-4 text-left")),
-
-
     # Dropdown menu aligned to the left
     dbc.Row(dbc.Col(dcc.Dropdown(
         id='variable-dropdown',
@@ -54,7 +51,9 @@ app.layout = dbc.Container([
         ],
         value='all_protests',  # Default value
         style={'width': '100%'}
-    ), width=8)),  # Keep the width setting if you want to control the size
+    ), width=10)),  # Keep the width setting if you want to control the size
+
+    dbc.Row(dbc.Col(html.H1(" "), className="mb-4 text-left")),
 
     # Time slider aligned to the left below the dropdown
     dbc.Row([
@@ -66,7 +65,11 @@ app.layout = dbc.Container([
                 max=time_steps,
                 step=1,
                 value=1,  # Default starting value for the slider
-                marks={i + 1: f"{week.split('-')[0]}<br>Week {week.split('-')[1]}" for i, week in enumerate(df["week_year"].unique())}
+                marks={i + 1: week for i, week in enumerate(df["week_year"].unique())},
+                tooltip={
+                    "always_visible": True,
+                    "placement": "bottom"
+                }
             )
         ], width=10)  # Width setting for the column
     ]),
