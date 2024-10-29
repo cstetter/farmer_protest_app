@@ -63,28 +63,10 @@ dbc.Row([
             max=time_steps,
             step=1,
             value=1,  # Default starting value for the slider
-            marks={},  # Empty marks to avoid showing them permanently
-            tooltip={
-                "always_visible": True,  # Tooltip always visible
-                "placement": "bottom",  # Optional position setting
-                "template": ""  # Template will be updated dynamically
-            }
+            marks={i + 1: f"{week.split('-')[0]}<br>Week {week.split('-')[1]}" for i, week in enumerate(df["week_year"].unique())}
         )
     ], width=10)  # Width setting for the column
 ])
-
-# Callback to update tooltip text based on the slider value
-@app.callback(
-    Output('time-slider', 'tooltip'),
-    [Input('time-slider', 'value')]
-)
-def update_tooltip(value):
-    # Mapping slider position to week labels
-    week_mapping = {i + 1: week for i, week in enumerate(df["week_year"].unique())}
-    return {
-        "always_visible": True,
-        "template": f"{week_mapping.get(value, '')}"  # Display the current week label
-    }
 
     # Play button aligned to the left
     dbc.Row(dbc.Col(
