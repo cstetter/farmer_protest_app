@@ -60,7 +60,11 @@ app.layout = dbc.Container([
         max=time_steps,
         step=1,
         value=1,  # Default value for the slider
-        marks={i + 1: f"{week.split('-')[0]}<br>Week {week.split('-')[1]}" for i, week in enumerate(df["week_year"].unique())},
+        marks={i + 1: week for i, week in enumerate(df["week_year"].unique())},
+        tooltip={
+            "always_visible": True,
+            "template": "$ {value}"
+    }
     ), width=10)),  # Keep the width setting
 
     # Play button aligned to the left
