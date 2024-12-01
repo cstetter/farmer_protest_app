@@ -87,7 +87,14 @@ app.layout = dbc.Container([
         width=10  # Set width to allow proper layout
     )),
 
-    dbc.Row(dbc.Col(html.P("Data source: Armed Conflict Location & Event Data Project (ACLED); www.acleddata.com."), className="mb-4 text-left")),
+    dbc.Row(
+    dbc.Col(
+        html.P([
+            "Data source: Armed Conflict Location & Event Data Project (ACLED); ",
+            html.A("www.acleddata.com", href="https://www.acleddata.com", target="_blank")
+        ]),
+        className="mb-4 text-left"
+    )),
 
     dbc.Row(dbc.Col(html.P("More information on how the categories of protest reasons wer built can be found at |link to paper|."), className="mb-4 text-left")),
 
