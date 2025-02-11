@@ -1,11 +1,11 @@
 # %%writefile ../protest_app/code.py
-
+import dash
 import pandas as pd
 from dash import dcc, html
 from dash.dependencies import Input, Output, State
 import plotly.graph_objs as go
 import dash_bootstrap_components as dbc  # Ensure dbc is imported
-import dash
+
 
 # Load the selected data
 selected_data = pd.read_csv('selected_data.csv')
